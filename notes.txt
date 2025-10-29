@@ -1,0 +1,2 @@
+1. Canny Edge Detection
+2. Threshold + Contour Detection
