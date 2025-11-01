@@ -22,7 +22,7 @@ client = ImageAnalysisClient(
 )
 
 # image path
-image_path = "downscale_10.png"
+image_path = "images\\capture1\\WIN_20251027_18_31_49_Pro.jpg"
 
 # Load image to analyze into a 'bytes' object
 with open(image_path, "rb") as f:

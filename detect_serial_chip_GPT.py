@@ -199,7 +199,7 @@ def read_ocr(image):
 
 
 # load the image
-img = cv.imread('images\\capture1\\WIN_20251027_18_37_09_Pro serial.jpg')
+img = cv.imread('images\\capture1\\WIN_20251027_18_31_49_Pro.jpg')
 
 # crop - can be ratio-based or contour-based
 # img_roi_ratio = crop_image(img, 'ratio')
@@ -239,7 +239,7 @@ img_laplacian_edges = apply_laplacian_edges(img_tophat)
 img_combined_laplacian_threshold = combine_laplacian_threshold(img_laplacian_edges, img_AdaptiveThreshold)
 
 
-plt.imshow(img_OtsuThreshold, cmap='gray')
+plt.imshow(img_tophat, cmap='gray')
 plt.show()
 
 
