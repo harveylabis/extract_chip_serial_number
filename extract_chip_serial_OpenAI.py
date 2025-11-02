@@ -49,6 +49,8 @@ def generate_prompt(range="", nature=""):
     return prompt  
 
 def get_ROI_from_ROIs(image_path, quadrant=4):
+    """Get the ROIs from a single image.
+    Avoid sending the whole image, only the ROI."""
     rois = get_chip_quadrants(image_path)
     if quadrant==1:
         roi = rois[1]
@@ -62,6 +64,7 @@ def get_ROI_from_ROIs(image_path, quadrant=4):
     return roi
 
 def crop_image(image, frac_h=0.9, frac_w=0.9):
+    """Crop the image if necessary"""
     h, w = image.shape[:2]
     return image[int((1-frac_h)*h):h, int((1-frac_w)*w):w]
 
