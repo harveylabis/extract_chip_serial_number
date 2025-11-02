@@ -2,6 +2,10 @@ import base64
 from openai import OpenAI
 import cv2 as cv
 import matplotlib.pyplot as plt
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # Load environment variables from .env file
 
 client = OpenAI()
 
