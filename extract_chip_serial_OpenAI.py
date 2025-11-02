@@ -102,15 +102,22 @@ def apply_clahe_bilateralFilter(image):
 ###################  PROGRAM LOGIC STARTS HERE ############################
                 
 # Path to your image
-image_path = "image1.jpg"
+image_path = "image2.jpg"
+quadrant_split = True # depends on the product
+quadrant = 3 # depends on the serial location
 
 # get image (or capture image)
 image_read = cv.imread(image_path)  # Reads as BGR by default
 image_rgb = cv.cvtColor(image_read, cv.COLOR_BGR2RGB) # Convert to RGB, plt expects RGB
 
-# cropped image if necessary = get ROI
-image_ROI = get_ROI_from_ROIs(image_rgb, quadrant=4) # only if serial is in quadrant X; OpenCV default is RGB
-image_ROI_BGR = cv.cvtColor(image_ROI, cv.COLOR_RGB2BGR) # we want ro show BGR for engraved markings to stand out as blue
+if quadrant_split:
+    # cropped image to get ROI
+    image_ROI = get_ROI_from_ROIs(image_rgb, quadrant=quadrant) # only if serial is in quadrant X; OpenCV default is RGB
+    image_ROI_BGR = cv.cvtColor(image_ROI, cv.COLOR_RGB2BGR) # we want to show BGR for engraved markings to stand out as blue
+else:
+    # if image serial marking is in the center, we will crop only to center, quadrant not needed
+    image_ROI = crop_image(image_read, frac_h=0.8, frac_w=0.8)
+    image_ROI_BGR = cv.cvtColor(image_ROI, cv.COLOR_RGB2BGR) # we want to show BGR for engraved markings to stand out as blue
 
 # # apply CLAHE (optional depending on the image)
 # image_upload_clahe = apply_clahe_bilateralFilter(image_ROI)
@@ -121,7 +128,7 @@ image_ROI_BGR = cv.cvtColor(image_ROI, cv.COLOR_RGB2BGR) # we want ro show BGR f
 image_to_send_OpenAI = f"{image_path} cropped.png"
 cv.imwrite(image_to_send_OpenAI, image_ROI)
 
-# you may include the range and nature (engraved, pen)
+# prepate the prompt to use, optiional to include the range and nature (engraved, pen)
 range_input = "1-3000"
 marking_nature = "engraved"
 generated_prompt = generate_prompt(range=range_input, nature=marking_nature)
