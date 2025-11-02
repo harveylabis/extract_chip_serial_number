@@ -2,10 +2,6 @@ import base64
 from openai import OpenAI
 import cv2 as cv
 import matplotlib.pyplot as plt
-from dotenv import load_dotenv
-import os
-
-load_dotenv()  # Load environment variables from .env file
 
 client = OpenAI()
 
@@ -106,8 +102,8 @@ def apply_clahe_bilateralFilter(image):
 ###################  PROGRAM LOGIC STARTS HERE ############################
                 
 # Path to your image
-image_path = "image2.jpg"
-quadrant_split = True # depends on the product
+image_path = "image3.jpg"
+quadrant_split = False # depends on the product
 quadrant = 3 # depends on the serial location
 
 # get image (or capture image)
